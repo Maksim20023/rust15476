@@ -1,7 +1,21 @@
-[package]
-name = "rust15476"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2"
 
-[dependencies]
-serde = { version = "1.0.208", features = ["derive"] }
+members = [
+    "control",
+    "logging"
+]
+
+[profile.release]
+# terminate process on panic
+panic = "abort"
+
+[profile.dev]
+opt-level = 1
+# terminate process on panic
+panic = 'abort'
+
+# Enable high optimizations for dependencies, but not for our code:
+[profile.dev.package."*"]
+opt-level = 3
+debug = false
